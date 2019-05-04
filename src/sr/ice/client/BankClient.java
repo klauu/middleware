@@ -15,6 +15,7 @@ import com.zeroc.Ice.ObjectPrx;
 import com.zeroc.Ice.Util;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
@@ -81,16 +82,23 @@ public class BankClient
                         System.out.println(client.type);
 					}
                     if (line.equals("balance")){
-                        System.out.println("pesel account_type ");
+                        System.out.println("pesel key account_type");
 
                         line = in.readLine();
                         String [] arguments = line.split( " ");
 
-                        if(arguments[1].equals("standard")){
+                        if(arguments[2].equals("standard")){
+                            Map<String, String> map = new LinkedHashMap<String, String>();
+                            map.put(arguments[0], arguments[1]);
+                            standard = standard.ice_context(map);
+
                             System.out.println(standard.getBalance(arguments[0]));
                         }
 
-                        if(arguments[1].equals("premium")){
+                        if(arguments[2].equals("premium")){
+                            Map<String, String> map = new LinkedHashMap<String, String>();
+                            map.put(arguments[0], arguments[1]);
+                            premium = premium.ice_context(map);
                             System.out.println(premium.getBalance(arguments[0]));
                         }
 

@@ -12,6 +12,9 @@ public class PremiumAccount implements Premium {
 
     @Override
     public double getBalance(String id, Current current) throws InvalidIDException {
+
+        System.out.println(current.ctx.get("1234"));
+
         Client client = (Client) current.adapter.find(new Identity(id, "premium"));
 
         if (client == null){
