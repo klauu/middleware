@@ -31,33 +31,39 @@ module Bank
       bool agreed;
       double ForeignCurrency;
       double NativeCurrency;
-    };
+  };
 
   struct NewClientResponse{
     AccountType type;
-    int key;
+    string key;
   };
 
-  exception InvalidIDException{
+  exception BaseException{
+      string msg;
+    };
+
+  exception InvalidIDException extends BaseException{
     string id;
-    string msg;
   };
 
-  exception InvalidCurrencyException{
+  exception InvalidCurrencyException extends BaseException{
+    Currency currency;
+  };
+
+  exception AuthenticationFailedException extends BaseException{
     string id;
-    string msg;
-   };
+  };
 
   interface ClientFactory{
-    Client newClient(UserData data, double balance) throws InvalidIDException;
+    NewClientResponse newClient(UserData data, double balance) throws InvalidIDException;
   };
 
   interface Standard{
-    double getBalance(string id) throws InvalidIDException;
+    double getBalance(string id) throws InvalidIDException, AuthenticationFailedException;
   };
 
   interface Premium extends Standard{
-    LoanResponse getLoan(LoanRequest request) throws InvalidIDException, InvalidCurrencyException;
+    LoanResponse getLoan(LoanRequest request) throws InvalidIDException, InvalidCurrencyException, AuthenticationFailedException;
   };
 
 };

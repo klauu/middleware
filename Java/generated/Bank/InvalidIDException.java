@@ -15,32 +15,30 @@
 
 package Bank;
 
-public class InvalidIDException extends com.zeroc.Ice.UserException
+public class InvalidIDException extends BaseException
 {
     public InvalidIDException()
     {
+        super();
         this.id = "";
-        this.msg = "";
     }
 
     public InvalidIDException(Throwable cause)
     {
         super(cause);
         this.id = "";
-        this.msg = "";
     }
 
-    public InvalidIDException(String id, String msg)
+    public InvalidIDException(String msg, String id)
     {
+        super(msg);
         this.id = id;
-        this.msg = msg;
     }
 
-    public InvalidIDException(String id, String msg, Throwable cause)
+    public InvalidIDException(String msg, String id, Throwable cause)
     {
-        super(cause);
+        super(msg, cause);
         this.id = id;
-        this.msg = msg;
     }
 
     public String ice_id()
@@ -50,16 +48,14 @@ public class InvalidIDException extends com.zeroc.Ice.UserException
 
     public String id;
 
-    public String msg;
-
     /** @hidden */
     @Override
     protected void _writeImpl(com.zeroc.Ice.OutputStream ostr_)
     {
-        ostr_.startSlice("::Bank::InvalidIDException", -1, true);
+        ostr_.startSlice("::Bank::InvalidIDException", -1, false);
         ostr_.writeString(id);
-        ostr_.writeString(msg);
         ostr_.endSlice();
+        super._writeImpl(ostr_);
     }
 
     /** @hidden */
@@ -68,10 +64,10 @@ public class InvalidIDException extends com.zeroc.Ice.UserException
     {
         istr_.startSlice();
         id = istr_.readString();
-        msg = istr_.readString();
         istr_.endSlice();
+        super._readImpl(istr_);
     }
 
     /** @hidden */
-    public static final long serialVersionUID = -1950019214L;
+    public static final long serialVersionUID = -1807951412L;
 }

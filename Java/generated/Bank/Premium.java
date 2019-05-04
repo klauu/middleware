@@ -18,7 +18,8 @@ package Bank;
 public interface Premium extends Standard
 {
     LoanResponse getLoan(LoanRequest request, com.zeroc.Ice.Current current)
-        throws InvalidCurrencyException,
+        throws AuthenticationFailedException,
+               InvalidCurrencyException,
                InvalidIDException;
 
     /** @hidden */

@@ -77,9 +77,10 @@ public class BankClient
 					    line = in.readLine();
 					    String [] arguments = line.split( " ");
 
-                        Client client = factory.newClient(new UserData(arguments[0], arguments[1], arguments[2], Integer.parseInt(arguments[3] )), Integer.parseInt(arguments[4]));
+                        NewClientResponse resp = factory.newClient(new UserData(arguments[0], arguments[1], arguments[2], Integer.parseInt(arguments[3] )), Integer.parseInt(arguments[4]));
 
-                        System.out.println(client.type);
+                        System.out.println(resp.type);
+						System.out.println(resp.key);
 					}
                     if (line.equals("balance")){
                         System.out.println("pesel key account_type");
@@ -91,15 +92,22 @@ public class BankClient
                             Map<String, String> map = new LinkedHashMap<String, String>();
                             map.put(arguments[0], arguments[1]);
                             standard = standard.ice_context(map);
-
-                            System.out.println(standard.getBalance(arguments[0]));
+                            try{
+                                System.out.println(standard.getBalance(arguments[0]));
+                            }catch (InvalidIDException | AuthenticationFailedException e){
+                                System.err.println(e.msg);
+                            }
                         }
 
                         if(arguments[2].equals("premium")){
                             Map<String, String> map = new LinkedHashMap<String, String>();
                             map.put(arguments[0], arguments[1]);
                             premium = premium.ice_context(map);
-                            System.out.println(premium.getBalance(arguments[0]));
+                            try{
+                                System.out.println(premium.getBalance(arguments[0]));
+                            }catch (InvalidIDException | AuthenticationFailedException e){
+                                System.err.println(e.msg);
+                            }
                         }
 
                     }

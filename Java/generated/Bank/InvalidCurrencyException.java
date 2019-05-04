@@ -15,32 +15,30 @@
 
 package Bank;
 
-public class InvalidCurrencyException extends com.zeroc.Ice.UserException
+public class InvalidCurrencyException extends BaseException
 {
     public InvalidCurrencyException()
     {
-        this.id = "";
-        this.msg = "";
+        super();
+        this.currency = Currency.PLN;
     }
 
     public InvalidCurrencyException(Throwable cause)
     {
         super(cause);
-        this.id = "";
-        this.msg = "";
+        this.currency = Currency.PLN;
     }
 
-    public InvalidCurrencyException(String id, String msg)
+    public InvalidCurrencyException(String msg, Currency currency)
     {
-        this.id = id;
-        this.msg = msg;
+        super(msg);
+        this.currency = currency;
     }
 
-    public InvalidCurrencyException(String id, String msg, Throwable cause)
+    public InvalidCurrencyException(String msg, Currency currency, Throwable cause)
     {
-        super(cause);
-        this.id = id;
-        this.msg = msg;
+        super(msg, cause);
+        this.currency = currency;
     }
 
     public String ice_id()
@@ -48,18 +46,16 @@ public class InvalidCurrencyException extends com.zeroc.Ice.UserException
         return "::Bank::InvalidCurrencyException";
     }
 
-    public String id;
-
-    public String msg;
+    public Currency currency;
 
     /** @hidden */
     @Override
     protected void _writeImpl(com.zeroc.Ice.OutputStream ostr_)
     {
-        ostr_.startSlice("::Bank::InvalidCurrencyException", -1, true);
-        ostr_.writeString(id);
-        ostr_.writeString(msg);
+        ostr_.startSlice("::Bank::InvalidCurrencyException", -1, false);
+        Currency.ice_write(ostr_, currency);
         ostr_.endSlice();
+        super._writeImpl(ostr_);
     }
 
     /** @hidden */
@@ -67,11 +63,11 @@ public class InvalidCurrencyException extends com.zeroc.Ice.UserException
     protected void _readImpl(com.zeroc.Ice.InputStream istr_)
     {
         istr_.startSlice();
-        id = istr_.readString();
-        msg = istr_.readString();
+        currency = Currency.ice_read(istr_);
         istr_.endSlice();
+        super._readImpl(istr_);
     }
 
     /** @hidden */
-    public static final long serialVersionUID = -2058782376L;
+    public static final long serialVersionUID = -1295578708L;
 }

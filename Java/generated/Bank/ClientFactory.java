@@ -17,7 +17,7 @@ package Bank;
 
 public interface ClientFactory extends com.zeroc.Ice.Object
 {
-    Client newClient(UserData data, double balance, com.zeroc.Ice.Current current)
+    NewClientResponse newClient(UserData data, double balance, com.zeroc.Ice.Current current)
         throws InvalidIDException;
 
     /** @hidden */
@@ -62,9 +62,9 @@ public interface ClientFactory extends com.zeroc.Ice.Object
         iceP_data = UserData.ice_read(istr);
         iceP_balance = istr.readDouble();
         inS.endReadParams();
-        Client ret = obj.newClient(iceP_data, iceP_balance, current);
+        NewClientResponse ret = obj.newClient(iceP_data, iceP_balance, current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        Client.ice_write(ostr, ret);
+        NewClientResponse.ice_write(ostr, ret);
         inS.endWriteParams(ostr);
         return inS.setResult(ostr);
     }

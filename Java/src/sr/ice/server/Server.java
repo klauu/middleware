@@ -21,46 +21,34 @@ public class Server
 	    Communicator communicator = null;
         try
         {
-            // 1. Inicjalizacja ICE - utworzenie communicatora
             communicator = Util.initialize(args);
 
             ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
-            // 3. Stworzenie serwanta/serwantów
             ClientFactory factory = new ClientFactory();
             Standard standard = new StandardAccount();
             Premium premium = new PremiumAccount();
 
-
-            // 4. Dodanie wpisów do tablicy ASM
             adapter.add(factory, new Identity("fact1", "factory"));
             adapter.add(standard, new Identity("standard", "accountManager"));
             adapter.add(premium, new Identity("premium", "accountManager"));
 
-
-            // 5. Aktywacja adaptera i przejœcie w pêtlê przetwarzania ¿¹dañ
             adapter.activate();
 
-            System.out.println("Entering event processing loop...");
+            System.out.println("Ready to work");
 
             communicator.waitForShutdown();
-
         }
         catch (Exception e)
         {
             System.err.println(e);
             status = 1;
         }
-        if (communicator != null)
-        {
-            // Clean up
-            //
-            try
-            {
+        if (communicator != null){
+            try{
                 communicator.destroy();
             }
-            catch (Exception e)
-            {
+            catch (Exception e){
                 System.err.println(e);
                 status = 1;
             }

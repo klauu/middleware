@@ -18,17 +18,23 @@ package Bank;
 public interface StandardPrx extends com.zeroc.Ice.ObjectPrx
 {
     default double getBalance(String id)
-        throws InvalidIDException
+        throws AuthenticationFailedException,
+               InvalidIDException
     {
         return getBalance(id, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default double getBalance(String id, java.util.Map<String, String> context)
-        throws InvalidIDException
+        throws AuthenticationFailedException,
+               InvalidIDException
     {
         try
         {
             return _iceI_getBalanceAsync(id, context, true).waitForResponseOrUserEx();
+        }
+        catch(AuthenticationFailedException ex)
+        {
+            throw ex;
         }
         catch(InvalidIDException ex)
         {
@@ -73,6 +79,7 @@ public interface StandardPrx extends com.zeroc.Ice.ObjectPrx
     /** @hidden */
     static final Class<?>[] _iceE_getBalance =
     {
+        AuthenticationFailedException.class,
         InvalidIDException.class
     };
 

@@ -18,19 +18,25 @@ package Bank;
 public interface PremiumPrx extends StandardPrx
 {
     default LoanResponse getLoan(LoanRequest request)
-        throws InvalidCurrencyException,
+        throws AuthenticationFailedException,
+               InvalidCurrencyException,
                InvalidIDException
     {
         return getLoan(request, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default LoanResponse getLoan(LoanRequest request, java.util.Map<String, String> context)
-        throws InvalidCurrencyException,
+        throws AuthenticationFailedException,
+               InvalidCurrencyException,
                InvalidIDException
     {
         try
         {
             return _iceI_getLoanAsync(request, context, true).waitForResponseOrUserEx();
+        }
+        catch(AuthenticationFailedException ex)
+        {
+            throw ex;
         }
         catch(InvalidCurrencyException ex)
         {
@@ -79,6 +85,7 @@ public interface PremiumPrx extends StandardPrx
     /** @hidden */
     static final Class<?>[] _iceE_getLoan =
     {
+        AuthenticationFailedException.class,
         InvalidCurrencyException.class,
         InvalidIDException.class
     };

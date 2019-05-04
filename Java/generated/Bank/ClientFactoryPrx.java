@@ -17,13 +17,13 @@ package Bank;
 
 public interface ClientFactoryPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default Client newClient(UserData data, double balance)
+    default NewClientResponse newClient(UserData data, double balance)
         throws InvalidIDException
     {
         return newClient(data, balance, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default Client newClient(UserData data, double balance, java.util.Map<String, String> context)
+    default NewClientResponse newClient(UserData data, double balance, java.util.Map<String, String> context)
         throws InvalidIDException
     {
         try
@@ -40,12 +40,12 @@ public interface ClientFactoryPrx extends com.zeroc.Ice.ObjectPrx
         }
     }
 
-    default java.util.concurrent.CompletableFuture<Client> newClientAsync(UserData data, double balance)
+    default java.util.concurrent.CompletableFuture<NewClientResponse> newClientAsync(UserData data, double balance)
     {
         return _iceI_newClientAsync(data, balance, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Client> newClientAsync(UserData data, double balance, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<NewClientResponse> newClientAsync(UserData data, double balance, java.util.Map<String, String> context)
     {
         return _iceI_newClientAsync(data, balance, context, false);
     }
@@ -58,15 +58,15 @@ public interface ClientFactoryPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Client> _iceI_newClientAsync(UserData iceP_data, double iceP_balance, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<NewClientResponse> _iceI_newClientAsync(UserData iceP_data, double iceP_balance, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Client> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "newClient", null, sync, _iceE_newClient);
+        com.zeroc.IceInternal.OutgoingAsync<NewClientResponse> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "newClient", null, sync, _iceE_newClient);
         f.invoke(true, context, null, ostr -> {
                      UserData.ice_write(ostr, iceP_data);
                      ostr.writeDouble(iceP_balance);
                  }, istr -> {
-                     Client ret;
-                     ret = Client.ice_read(istr);
+                     NewClientResponse ret;
+                     ret = NewClientResponse.ice_read(istr);
                      return ret;
                  });
         return f;

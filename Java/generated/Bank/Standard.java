@@ -18,7 +18,8 @@ package Bank;
 public interface Standard extends com.zeroc.Ice.Object
 {
     double getBalance(String id, com.zeroc.Ice.Current current)
-        throws InvalidIDException;
+        throws AuthenticationFailedException,
+               InvalidIDException;
 
     /** @hidden */
     static final String[] _iceIds =

@@ -20,14 +20,15 @@ public class NewClientResponse implements java.lang.Cloneable,
 {
     public AccountType type;
 
-    public int key;
+    public String key;
 
     public NewClientResponse()
     {
         this.type = AccountType.STANDARD;
+        this.key = "";
     }
 
-    public NewClientResponse(AccountType type, int key)
+    public NewClientResponse(AccountType type, String key)
     {
         this.type = type;
         this.key = key;
@@ -56,7 +57,10 @@ public class NewClientResponse implements java.lang.Cloneable,
             }
             if(this.key != r.key)
             {
-                return false;
+                if(this.key == null || r.key == null || !this.key.equals(r.key))
+                {
+                    return false;
+                }
             }
 
             return true;
@@ -91,13 +95,13 @@ public class NewClientResponse implements java.lang.Cloneable,
     public void ice_writeMembers(com.zeroc.Ice.OutputStream ostr)
     {
         AccountType.ice_write(ostr, this.type);
-        ostr.writeInt(this.key);
+        ostr.writeString(this.key);
     }
 
     public void ice_readMembers(com.zeroc.Ice.InputStream istr)
     {
         this.type = AccountType.ice_read(istr);
-        this.key = istr.readInt();
+        this.key = istr.readString();
     }
 
     static public void ice_write(com.zeroc.Ice.OutputStream ostr, NewClientResponse v)

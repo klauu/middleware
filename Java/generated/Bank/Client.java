@@ -15,13 +15,12 @@
 
 package Bank;
 
-import com.zeroc.Ice.Current;
 import com.zeroc.Ice.Object;
 
-import java.io.Serializable;
-
-public class Client implements Cloneable,
-                               Serializable, Object {
+public class Client implements java.lang.Cloneable,
+                               java.io.Serializable,
+        Object
+{
     public UserData data;
 
     public AccountType type;
@@ -172,9 +171,4 @@ public class Client implements Cloneable,
 
     /** @hidden */
     public static final long serialVersionUID = -2075899907L;
-
-    @Override
-    public boolean ice_isA(String s, Current current) {
-        return false;
-    }
 }
