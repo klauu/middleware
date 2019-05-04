@@ -7,35 +7,36 @@ module Bank
 
   enum Currency{ PLN, GBD, USD };
 
-  struct Money{
-    double val;
-  };
-
   struct UserData {
     string name;
     string surname;
     string id;
-    Money monthlyIncome;
+    double monthlyIncome;
   };
 
   struct Client{
     UserData data;
     AccountType type;
-    Money balance;
+    double balance;
   };
 
   struct LoanRequest{
     string id;
     Currency cur;
-    Money amount;
+    double amount;
     int time;
   };
 
   struct LoanResponse{
       bool agreed;
-      Money ForeignCurrency;
-      Money NativeCurrency;
+      double ForeignCurrency;
+      double NativeCurrency;
     };
+
+  struct NewClientResponse{
+    AccountType type;
+    int key;
+  };
 
   exception InvalidIDException{
     string id;
@@ -48,11 +49,11 @@ module Bank
    };
 
   interface ClientFactory{
-    Client newClient(UserData data, Money balance) throws InvalidIDException;
+    Client newClient(UserData data, double balance) throws InvalidIDException;
   };
 
   interface Standard{
-    Money getBalance(string id) throws InvalidIDException;
+    double getBalance(string id) throws InvalidIDException;
   };
 
   interface Premium extends Standard{

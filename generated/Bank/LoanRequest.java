@@ -22,7 +22,7 @@ public class LoanRequest implements java.lang.Cloneable,
 
     public Currency cur;
 
-    public Money amount;
+    public double amount;
 
     public int time;
 
@@ -30,10 +30,9 @@ public class LoanRequest implements java.lang.Cloneable,
     {
         this.id = "";
         this.cur = Currency.PLN;
-        this.amount = new Money();
     }
 
-    public LoanRequest(String id, Currency cur, Money amount, int time)
+    public LoanRequest(String id, Currency cur, double amount, int time)
     {
         this.id = id;
         this.cur = cur;
@@ -71,10 +70,7 @@ public class LoanRequest implements java.lang.Cloneable,
             }
             if(this.amount != r.amount)
             {
-                if(this.amount == null || r.amount == null || !this.amount.equals(r.amount))
-                {
-                    return false;
-                }
+                return false;
             }
             if(this.time != r.time)
             {
@@ -116,7 +112,7 @@ public class LoanRequest implements java.lang.Cloneable,
     {
         ostr.writeString(this.id);
         Currency.ice_write(ostr, this.cur);
-        Money.ice_write(ostr, this.amount);
+        ostr.writeDouble(this.amount);
         ostr.writeInt(this.time);
     }
 
@@ -124,7 +120,7 @@ public class LoanRequest implements java.lang.Cloneable,
     {
         this.id = istr.readString();
         this.cur = Currency.ice_read(istr);
-        this.amount = Money.ice_read(istr);
+        this.amount = istr.readDouble();
         this.time = istr.readInt();
     }
 

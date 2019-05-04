@@ -17,7 +17,7 @@ package Bank;
 
 public interface Standard extends com.zeroc.Ice.Object
 {
-    Money getBalance(String id, com.zeroc.Ice.Current current)
+    double getBalance(String id, com.zeroc.Ice.Current current)
         throws InvalidIDException;
 
     /** @hidden */
@@ -60,9 +60,9 @@ public interface Standard extends com.zeroc.Ice.Object
         String iceP_id;
         iceP_id = istr.readString();
         inS.endReadParams();
-        Money ret = obj.getBalance(iceP_id, current);
+        double ret = obj.getBalance(iceP_id, current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        Money.ice_write(ostr, ret);
+        ostr.writeDouble(ret);
         inS.endWriteParams(ostr);
         return inS.setResult(ostr);
     }

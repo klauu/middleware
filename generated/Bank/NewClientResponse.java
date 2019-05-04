@@ -15,30 +15,22 @@
 
 package Bank;
 
-import com.zeroc.Ice.Current;
-import com.zeroc.Ice.Object;
-
-import java.io.Serializable;
-
-public class Client implements Cloneable,
-                               Serializable, Object {
-    public UserData data;
-
+public class NewClientResponse implements java.lang.Cloneable,
+                                          java.io.Serializable
+{
     public AccountType type;
 
-    public double balance;
+    public int key;
 
-    public Client()
+    public NewClientResponse()
     {
-        this.data = new UserData();
         this.type = AccountType.STANDARD;
     }
 
-    public Client(UserData data, AccountType type, double balance)
+    public NewClientResponse(AccountType type, int key)
     {
-        this.data = data;
         this.type = type;
-        this.balance = balance;
+        this.key = key;
     }
 
     public boolean equals(java.lang.Object rhs)
@@ -47,21 +39,14 @@ public class Client implements Cloneable,
         {
             return true;
         }
-        Client r = null;
-        if(rhs instanceof Client)
+        NewClientResponse r = null;
+        if(rhs instanceof NewClientResponse)
         {
-            r = (Client)rhs;
+            r = (NewClientResponse)rhs;
         }
 
         if(r != null)
         {
-            if(this.data != r.data)
-            {
-                if(this.data == null || r.data == null || !this.data.equals(r.data))
-                {
-                    return false;
-                }
-            }
             if(this.type != r.type)
             {
                 if(this.type == null || r.type == null || !this.type.equals(r.type))
@@ -69,7 +54,7 @@ public class Client implements Cloneable,
                     return false;
                 }
             }
-            if(this.balance != r.balance)
+            if(this.key != r.key)
             {
                 return false;
             }
@@ -83,19 +68,18 @@ public class Client implements Cloneable,
     public int hashCode()
     {
         int h_ = 5381;
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::Bank::Client");
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, data);
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::Bank::NewClientResponse");
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, type);
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, balance);
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, key);
         return h_;
     }
 
-    public Client clone()
+    public NewClientResponse clone()
     {
-        Client c = null;
+        NewClientResponse c = null;
         try
         {
-            c = (Client)super.clone();
+            c = (NewClientResponse)super.clone();
         }
         catch(CloneNotSupportedException ex)
         {
@@ -106,19 +90,17 @@ public class Client implements Cloneable,
 
     public void ice_writeMembers(com.zeroc.Ice.OutputStream ostr)
     {
-        UserData.ice_write(ostr, this.data);
         AccountType.ice_write(ostr, this.type);
-        ostr.writeDouble(this.balance);
+        ostr.writeInt(this.key);
     }
 
     public void ice_readMembers(com.zeroc.Ice.InputStream istr)
     {
-        this.data = UserData.ice_read(istr);
         this.type = AccountType.ice_read(istr);
-        this.balance = istr.readDouble();
+        this.key = istr.readInt();
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, Client v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, NewClientResponse v)
     {
         if(v == null)
         {
@@ -130,14 +112,14 @@ public class Client implements Cloneable,
         }
     }
 
-    static public Client ice_read(com.zeroc.Ice.InputStream istr)
+    static public NewClientResponse ice_read(com.zeroc.Ice.InputStream istr)
     {
-        Client v = new Client();
+        NewClientResponse v = new NewClientResponse();
         v.ice_readMembers(istr);
         return v;
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<Client> v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<NewClientResponse> v)
     {
         if(v != null && v.isPresent())
         {
@@ -145,7 +127,7 @@ public class Client implements Cloneable,
         }
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, Client v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, NewClientResponse v)
     {
         if(ostr.writeOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
         {
@@ -155,12 +137,12 @@ public class Client implements Cloneable,
         }
     }
 
-    static public java.util.Optional<Client> ice_read(com.zeroc.Ice.InputStream istr, int tag)
+    static public java.util.Optional<NewClientResponse> ice_read(com.zeroc.Ice.InputStream istr, int tag)
     {
         if(istr.readOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
         {
             istr.skip(4);
-            return java.util.Optional.of(Client.ice_read(istr));
+            return java.util.Optional.of(NewClientResponse.ice_read(istr));
         }
         else
         {
@@ -168,13 +150,8 @@ public class Client implements Cloneable,
         }
     }
 
-    private static final Client _nullMarshalValue = new Client();
+    private static final NewClientResponse _nullMarshalValue = new NewClientResponse();
 
     /** @hidden */
-    public static final long serialVersionUID = -2075899907L;
-
-    @Override
-    public boolean ice_isA(String s, Current current) {
-        return false;
-    }
+    public static final long serialVersionUID = -1019403708L;
 }

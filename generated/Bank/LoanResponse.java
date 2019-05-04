@@ -20,17 +20,15 @@ public class LoanResponse implements java.lang.Cloneable,
 {
     public boolean agreed;
 
-    public Money ForeignCurrency;
+    public double ForeignCurrency;
 
-    public Money NativeCurrency;
+    public double NativeCurrency;
 
     public LoanResponse()
     {
-        this.ForeignCurrency = new Money();
-        this.NativeCurrency = new Money();
     }
 
-    public LoanResponse(boolean agreed, Money ForeignCurrency, Money NativeCurrency)
+    public LoanResponse(boolean agreed, double ForeignCurrency, double NativeCurrency)
     {
         this.agreed = agreed;
         this.ForeignCurrency = ForeignCurrency;
@@ -57,17 +55,11 @@ public class LoanResponse implements java.lang.Cloneable,
             }
             if(this.ForeignCurrency != r.ForeignCurrency)
             {
-                if(this.ForeignCurrency == null || r.ForeignCurrency == null || !this.ForeignCurrency.equals(r.ForeignCurrency))
-                {
-                    return false;
-                }
+                return false;
             }
             if(this.NativeCurrency != r.NativeCurrency)
             {
-                if(this.NativeCurrency == null || r.NativeCurrency == null || !this.NativeCurrency.equals(r.NativeCurrency))
-                {
-                    return false;
-                }
+                return false;
             }
 
             return true;
@@ -103,15 +95,15 @@ public class LoanResponse implements java.lang.Cloneable,
     public void ice_writeMembers(com.zeroc.Ice.OutputStream ostr)
     {
         ostr.writeBool(this.agreed);
-        Money.ice_write(ostr, this.ForeignCurrency);
-        Money.ice_write(ostr, this.NativeCurrency);
+        ostr.writeDouble(this.ForeignCurrency);
+        ostr.writeDouble(this.NativeCurrency);
     }
 
     public void ice_readMembers(com.zeroc.Ice.InputStream istr)
     {
         this.agreed = istr.readBool();
-        this.ForeignCurrency = Money.ice_read(istr);
-        this.NativeCurrency = Money.ice_read(istr);
+        this.ForeignCurrency = istr.readDouble();
+        this.NativeCurrency = istr.readDouble();
     }
 
     static public void ice_write(com.zeroc.Ice.OutputStream ostr, LoanResponse v)

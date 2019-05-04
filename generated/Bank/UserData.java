@@ -24,17 +24,16 @@ public class UserData implements java.lang.Cloneable,
 
     public String id;
 
-    public Money monthlyIncome;
+    public double monthlyIncome;
 
     public UserData()
     {
         this.name = "";
         this.surname = "";
         this.id = "";
-        this.monthlyIncome = new Money();
     }
 
-    public UserData(String name, String surname, String id, Money monthlyIncome)
+    public UserData(String name, String surname, String id, double monthlyIncome)
     {
         this.name = name;
         this.surname = surname;
@@ -79,10 +78,7 @@ public class UserData implements java.lang.Cloneable,
             }
             if(this.monthlyIncome != r.monthlyIncome)
             {
-                if(this.monthlyIncome == null || r.monthlyIncome == null || !this.monthlyIncome.equals(r.monthlyIncome))
-                {
-                    return false;
-                }
+                return false;
             }
 
             return true;
@@ -121,7 +117,7 @@ public class UserData implements java.lang.Cloneable,
         ostr.writeString(this.name);
         ostr.writeString(this.surname);
         ostr.writeString(this.id);
-        Money.ice_write(ostr, this.monthlyIncome);
+        ostr.writeDouble(this.monthlyIncome);
     }
 
     public void ice_readMembers(com.zeroc.Ice.InputStream istr)
@@ -129,7 +125,7 @@ public class UserData implements java.lang.Cloneable,
         this.name = istr.readString();
         this.surname = istr.readString();
         this.id = istr.readString();
-        this.monthlyIncome = Money.ice_read(istr);
+        this.monthlyIncome = istr.readDouble();
     }
 
     static public void ice_write(com.zeroc.Ice.OutputStream ostr, UserData v)

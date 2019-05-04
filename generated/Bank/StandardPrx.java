@@ -17,13 +17,13 @@ package Bank;
 
 public interface StandardPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default Money getBalance(String id)
+    default double getBalance(String id)
         throws InvalidIDException
     {
         return getBalance(id, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default Money getBalance(String id, java.util.Map<String, String> context)
+    default double getBalance(String id, java.util.Map<String, String> context)
         throws InvalidIDException
     {
         try
@@ -40,12 +40,12 @@ public interface StandardPrx extends com.zeroc.Ice.ObjectPrx
         }
     }
 
-    default java.util.concurrent.CompletableFuture<Money> getBalanceAsync(String id)
+    default java.util.concurrent.CompletableFuture<java.lang.Double> getBalanceAsync(String id)
     {
         return _iceI_getBalanceAsync(id, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Money> getBalanceAsync(String id, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Double> getBalanceAsync(String id, java.util.Map<String, String> context)
     {
         return _iceI_getBalanceAsync(id, context, false);
     }
@@ -57,14 +57,14 @@ public interface StandardPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Money> _iceI_getBalanceAsync(String iceP_id, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> _iceI_getBalanceAsync(String iceP_id, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Money> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getBalance", null, sync, _iceE_getBalance);
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Double> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getBalance", null, sync, _iceE_getBalance);
         f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_id);
                  }, istr -> {
-                     Money ret;
-                     ret = Money.ice_read(istr);
+                     double ret;
+                     ret = istr.readDouble();
                      return ret;
                  });
         return f;
