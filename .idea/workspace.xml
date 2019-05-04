@@ -2,45 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="172cc741-a7a5-4f22-8335-1835951ec830" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/ice_3_7_2.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/config.client" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/config.server" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/AccountType.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/Client.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/ClientFactory.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/ClientFactoryPrx.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/Currency.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/InvalidCurrencyException.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/InvalidIDException.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/LoanRequest.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/LoanResponse.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/NewClientResponse.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/Premium.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/PremiumPrx.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/Standard.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/StandardPrx.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/UserData.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/_ClientFactoryPrxI.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/_PremiumPrxI.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/generated/Bank/_StandardPrxI.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/middleware.iml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/slice/bank.ice" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/sr/ice/client/BankClient.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/sr/ice/server/ClientDatabase.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/sr/ice/server/ClientFactory.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/sr/ice/server/CurrencyRates.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/sr/ice/server/PremiumAccount.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/sr/ice/server/Server.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/sr/ice/server/StandardAccount.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/Java/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Java/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -291,7 +254,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
