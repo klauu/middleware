@@ -1,6 +1,4 @@
-package sr.ice.server;
-
-import Bank.Client;
+package server;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

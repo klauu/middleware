@@ -1,9 +1,8 @@
-package sr.ice.server;
+package server;
 
 import Bank.*;
 import com.zeroc.Ice.Current;
 import com.zeroc.Ice.Identity;
-import sr.ice.server.ClientDatabase.*;
 
 public class ClientFactory implements Bank.ClientFactory{
 

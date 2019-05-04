@@ -1,4 +1,4 @@
-package sr.ice.server;
+package server;
 // **********************************************************************
 //
 // Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
@@ -25,7 +25,7 @@ public class Server
 
             ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
-            ClientFactory factory = new ClientFactory();
+            server.ClientFactory factory = new server.ClientFactory();
             Standard standard = new StandardAccount();
             Premium premium = new PremiumAccount();
 

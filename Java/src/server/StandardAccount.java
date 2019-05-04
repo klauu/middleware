@@ -1,4 +1,4 @@
-package sr.ice.server;
+package server;
 
 import Bank.AuthenticationFailedException;
 import Bank.Client;
@@ -16,8 +16,6 @@ public class StandardAccount implements Standard {
         if(client == null){ throw new InvalidIDException("Account doesn't exist", id); }
 
         if(!ClientDatabase.isValid(id, current.ctx.get(id))){ throw new AuthenticationFailedException("Cannot authenticate the account", id); }
-
-     //   System.out.println(current.ctx);
 
         return client.balance;
     }

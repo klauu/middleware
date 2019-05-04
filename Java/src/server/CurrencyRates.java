@@ -1,4 +1,4 @@
-package sr.ice.server;
+package server;
 
 enum Currencies{
     PLN,
