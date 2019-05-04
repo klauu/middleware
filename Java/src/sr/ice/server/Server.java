@@ -24,11 +24,6 @@ public class Server
             // 1. Inicjalizacja ICE - utworzenie communicatora
             communicator = Util.initialize(args);
 
-            // 2. Konfiguracja adaptera
-            // METODA 1 (polecana produkcyjnie): Konfiguracja adaptera Adapter1 jest w pliku konfiguracyjnym podanym jako parametr uruchomienia serwera
-            //Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");
-
-            // METODA 2 (niepolecana, dopuszczalna testowo): Konfiguracja adaptera Adapter1 jest w kodzie Ÿród³owym
             ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
             // 3. Stworzenie serwanta/serwantów
