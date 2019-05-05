@@ -28,6 +28,8 @@ public class ClientFactory implements Bank.ClientFactory{
 
         ClientDatabase.addClientPassword(data.id, key);
 
+        System.out.println("Created new client: " + client.data.name + " " + client.data.surname);
+
         return new NewClientResponse(type, key);
     }
 
@@ -36,6 +38,5 @@ public class ClientFactory implements Bank.ClientFactory{
         if(income > 10000) return true;
         return false;
     }
-
 
 }

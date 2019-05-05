@@ -29,11 +29,9 @@ public class Server
 
             adapter.activate();
 
-
-            List<Currency> cur = new LinkedList<>();
-
             System.out.println("Type in currency codes spearated by space: ");
 
+            List<Currency> cur = new LinkedList<>();
             java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
             String line = in.readLine();
             String[] list = line.split(" ");
@@ -66,7 +64,6 @@ public class Server
         }
         System.exit(status);
 	}
-
 
 	public static void main(String[] args)
 	{

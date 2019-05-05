@@ -1,6 +1,5 @@
 package currency;
 
-import Bank.Currency;
 import CurrencyPackage.CurrencyRatesStreamGrpc;
 import CurrencyPackage.RatesRespond;
 
@@ -22,8 +21,7 @@ public class CurrencyRatesStreamImpl extends CurrencyRatesStreamGrpc.CurrencyRat
     @Override
     public void getCurrencyRates(CurrencyPackage.RatesRequest request,
                                  io.grpc.stub.StreamObserver<CurrencyPackage.RatesRespond> responseObserver){
-        System.out.println("Get currency rates");
-        System.out.println("Currency: " + request.getCur());
+        System.out.println("Bank asked for a stream for currency: " + request.getCur());
 
         boolean flag = true;
         CurrencyRatesServer.Cur cur = null;
@@ -31,11 +29,13 @@ public class CurrencyRatesStreamImpl extends CurrencyRatesStreamGrpc.CurrencyRat
            cur = CurrencyRatesServer.Cur.valueOf(request.getCur());
         } catch (IllegalArgumentException e){
             flag = false;
-            //TODO rzucanie wyjątkiem?
         }
 
         while(flag){
-            RatesRespond resp = RatesRespond.newBuilder().setValue(getCurrencyRate(cur)).setCur(request.getCur()).build();
+            RatesRespond resp = RatesRespond.newBuilder()
+                    .setValue(getCurrencyRate(cur))
+                    .setCur(request.getCur())
+                    .build();
             responseObserver.onNext(resp);
             try { Thread.sleep(5000); } catch(java.lang.InterruptedException ex) { }
         }
@@ -55,5 +55,6 @@ public class CurrencyRatesStreamImpl extends CurrencyRatesStreamGrpc.CurrencyRat
         currencies.put(CurrencyRatesServer.Cur.CHF, 3.7480);
         currencies.put(CurrencyRatesServer.Cur.HKD, 0.4867);
         currencies.put(CurrencyRatesServer.Cur.NZD, 2.5324);
+        currencies.put(CurrencyRatesServer.Cur.SEK, 0.4001);
     }
 }

@@ -1,12 +1,4 @@
 package client;
-// **********************************************************************
-//
-// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
-//
-// This copy of Ice is licensed to you under the terms described in the
-// ICE_LICENSE file included in this distribution.
-//
-// **********************************************************************
 
 import Bank.*;
 import com.zeroc.Ice.Communicator;
@@ -28,9 +20,7 @@ public class BankClient
 			communicator = Util.initialize(args);
 
 			ObjectPrx factoryBase = communicator.stringToProxy("factory/fact1:tcp -h localhost -p 10000:udp -h localhost -p 10000");
-
             ObjectPrx standardBase = communicator.stringToProxy("accountManager/standard:tcp -h localhost -p 10000:udp -h localhost -p 10000");
-
             ObjectPrx premiumBase = communicator.stringToProxy("accountManager/premium:tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
 			ClientFactoryPrx factory = ClientFactoryPrx.checkedCast(factoryBase);
@@ -44,8 +34,7 @@ public class BankClient
 
 			String line = null;
 			java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
-
-			do{
+            do{
 				try{
 					System.out.print(">> ");
 					System.out.flush();
@@ -53,12 +42,11 @@ public class BankClient
 					if (line == null) {
 						break;
 					}
-					else if (line.replace(" ","").equalsIgnoreCase("newclient")){
+					else if(line.replace(" ","").equalsIgnoreCase("newclient")){
 
                         System.out.println("Type in: name surname pesel monthly_income initial_balance");
 					    line = in.readLine();
 					    String [] elems = line.split( " ");
-
 
 					    if(elems.length == 5){
                             if(isPeselValid(elems[2])){
@@ -74,8 +62,8 @@ public class BankClient
                         }
 					}
                     else if (line.replace(" ","").equalsIgnoreCase("balance")){
-                        System.out.println("Type in: pesel account_type");
 
+                        System.out.println("Type in: pesel account_type");
                         line = in.readLine();
                         String [] elems = line.split( " ");
 
@@ -109,6 +97,7 @@ public class BankClient
                         }
                     }
                     else if (line.replace(" ","").equalsIgnoreCase("help")){
+
                         System.out.println("Available operations: \nnew client\nbalance\nloan\nhelp\nquit");
                     }
                     else if (line.replace(" ","").equalsIgnoreCase("loan")){
@@ -118,14 +107,6 @@ public class BankClient
                         String [] elems = line.split( " ");
 
                         if(elems.length == 4){
-
-                            System.out.println("Type your key: ");
-                            String key = in.readLine();
-
-                            Map<String, String> map = new LinkedHashMap<String, String>();
-                            map.put(elems[0], key);
-                            premium = premium.ice_context(map);
-
                             Currency cur = null;
 
                             boolean currFlag = false;
@@ -138,6 +119,12 @@ public class BankClient
                             if(currFlag){
                                 System.out.println("No such currency.");
                             }else{
+                                System.out.println("Type your key: ");
+                                String key = in.readLine();
+
+                                Map<String, String> map = new LinkedHashMap<String, String>();
+                                map.put(elems[0], key);
+                                premium = premium.ice_context(map);
                                 try{
                                     LoanResponse resp = premium.getLoan(new LoanRequest(elems[0], cur, Double.valueOf(elems[2]), Integer.valueOf(elems[3])));
                                     if(resp.agreed){
@@ -152,8 +139,6 @@ public class BankClient
                                     System.err.println(e.msg);
                                 }
                             }
-
-
                         }else{
                             System.out.println("Wrong number of arguments.\nTry again.");
                         }
@@ -167,7 +152,7 @@ public class BankClient
 				catch (java.io.IOException ex){
 					System.err.println(ex);
 				}
-			}while (!line.equals("quit"));
+			}while(!line.equals("quit"));
 		} catch (LocalException e) {
 			e.printStackTrace();
 			status = 1;
