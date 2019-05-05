@@ -57,7 +57,6 @@ public class CurrencyRatesServer {
     }
 
     enum Cur{
-        GBP, EUR, USD
+        JPY, GBP, USD, EUR, CAN, CHF, HKD, SEK, NZD
     }
-
 }

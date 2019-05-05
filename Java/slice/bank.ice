@@ -5,7 +5,7 @@ module Bank
 {
   enum AccountType { STANDARD, PREMIUM };
 
-  enum Currency{ PLN, GBD, USD };
+  enum Currency{ JPY, GBP, USD, EUR, CAN, CHF, HKD, SEK, NZD };
 
   struct UserData {
     string name;

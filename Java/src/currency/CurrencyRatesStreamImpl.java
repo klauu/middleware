@@ -35,7 +35,7 @@ public class CurrencyRatesStreamImpl extends CurrencyRatesStreamGrpc.CurrencyRat
         }
 
         while(flag){
-            RatesRespond resp = RatesRespond.newBuilder().setValue(getCurrencyRate(cur)).build();
+            RatesRespond resp = RatesRespond.newBuilder().setValue(getCurrencyRate(cur)).setCur(request.getCur()).build();
             responseObserver.onNext(resp);
             try { Thread.sleep(5000); } catch(java.lang.InterruptedException ex) { }
         }
@@ -47,9 +47,13 @@ public class CurrencyRatesStreamImpl extends CurrencyRatesStreamGrpc.CurrencyRat
     }
 
     private void initMap(){
-        currencies.put(CurrencyRatesServer.Cur.EUR, 4.95);
-        currencies.put(CurrencyRatesServer.Cur.USD, 4.20);
-        currencies.put(CurrencyRatesServer.Cur.GBP, 5.15);
+        currencies.put(CurrencyRatesServer.Cur.EUR, 4.2795);
+        currencies.put(CurrencyRatesServer.Cur.USD, 3.8177);
+        currencies.put(CurrencyRatesServer.Cur.GBP, 4.9840);
+        currencies.put(CurrencyRatesServer.Cur.JPY, 0.0342);
+        currencies.put(CurrencyRatesServer.Cur.CAN, 2.8402);
+        currencies.put(CurrencyRatesServer.Cur.CHF, 3.7480);
+        currencies.put(CurrencyRatesServer.Cur.HKD, 0.4867);
+        currencies.put(CurrencyRatesServer.Cur.NZD, 2.5324);
     }
-
 }

@@ -14,20 +14,41 @@ public class PremiumAccount implements Premium {
 
         if(!ClientDatabase.isValid(request.id, current.ctx.get(request.id))){ throw new AuthenticationFailedException("Cannot authenticate the account", request.id); }
 
-        //czy waluta jest obsługiwana przez bank -> Invalid Currency Exception
+        double rate = 0;
+        //try{
+            rate = CurrencyClient.getCurrencyRate(request.cur);
+        //}catch (Exception e){
+           // throw new InvalidCurrencyException("Currency isn't available in the Bank", request.cur);
+       // }
 
-        //pobieramy kurs dla danej waluty
+        System.out.println("Kurs danej waluty: " + rate);
+
 
         //wyliczamy na podstawie kursu, czasu i kwoty
 
         //new LoanResponse(...)
 
-        System.out.println(request.cur);
-        System.out.println(request.id);
-        System.out.println(request.amount);
-        System.out.println(request.time);
+        boolean agreed = true;
 
-        LoanResponse resp = new LoanResponse( true, 12,12);
+        if(request.time < 12 || request.time > 120) agreed = false;
+        else if(request.amount < 5000 || request.amount > 100000) agreed = false;
+
+
+
+
+    //    System.out.println(request.cur);
+    //    System.out.println(request.id);
+     //   System.out.println(request.amount);
+      //  System.out.println(request.time);
+
+        LoanResponse resp = null;
+        if(agreed){
+            resp = new LoanResponse( agreed, 0.06 * request.amount,1.06 * request.amount * rate);
+        }else{
+            resp = new LoanResponse( agreed, 0,0);
+        }
+
+
         return resp;
     }
 

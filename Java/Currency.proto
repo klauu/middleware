@@ -5,7 +5,7 @@ option java_multiple_files = true;
 option java_outer_classname = "CurrencyProto";
 option objc_class_prefix = "HLW";
 
-package Currency;
+package CurrencyPackage;
 
 message RatesRequest
 {
@@ -14,7 +14,8 @@ message RatesRequest
 
 message RatesRespond
 {
-  double value = 1;
+  string cur = 1;
+  double value = 2;
 }
 
 

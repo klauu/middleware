@@ -1,17 +1,11 @@
 package server;
-// **********************************************************************
-//
-// Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
-//
-// This copy of Ice is licensed to you under the terms described in the
-// ICE_LICENSE file included in this distribution.
-//
-// **********************************************************************
 
 import Bank.*;
 import com.zeroc.Ice.*;
 
 import java.lang.Exception;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Server
 {
@@ -35,10 +29,24 @@ public class Server
 
             adapter.activate();
 
-            System.out.println("Ready to work");
+
+            List<Currency> cur = new LinkedList<>();
+
+            System.out.println("Type in currency codes spearated by space: ");
+
+            java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
+            String line = in.readLine();
+            String[] list = line.split(" ");
+
+            for(String elem : list){
+                try{
+                    Currency c = Currency.valueOf(elem);
+                    cur.add(c);
+                }catch (IllegalArgumentException e){  }
+            }
 
             CurrencyClient currencyClient = new CurrencyClient("localhost", 50051);
-            currencyClient.run();
+            currencyClient.run(cur);
 
             communicator.waitForShutdown();
         }
