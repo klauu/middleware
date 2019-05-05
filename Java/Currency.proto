@@ -1,0 +1,23 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "CurrencyProto";
+option objc_class_prefix = "HLW";
+
+package Currency;
+
+message RatesRequest
+{
+  string cur = 1;
+}
+
+message RatesRespond
+{
+  double value = 1;
+}
+
+
+service CurrencyRatesStream {
+  rpc GetCurrencyRates(RatesRequest) returns (stream RatesRespond) {}
+}

@@ -59,13 +59,17 @@ public class BankClient
 					    line = in.readLine();
 					    String [] elems = line.split( " ");
 
-					    if(elems.length == 5){
-                            NewClientResponse resp = factory.newClient(new UserData(elems[0], elems[1], elems[2], Integer.parseInt(elems[3] )), Integer.parseInt(elems[4]));
+					    if(isPeselValid(elems[2])){
+                            if(elems.length == 5){
+                                NewClientResponse resp = factory.newClient(new UserData(elems[0], elems[1], elems[2], Double.valueOf(elems[3] )), Double.valueOf(elems[4]));
 
-                            System.out.println("Type: " + resp.type);
-                            System.out.println("Key: " + resp.key);
+                                System.out.println("Type: " + resp.type);
+                                System.out.println("Key: " + resp.key);
+                            }else{
+                                System.out.println("Wrong number of arguments.\nTry again.");
+                            }
                         }else{
-                            System.out.println("Wrong number of arguments.\nTry again.");
+                            System.out.println("Given ID is not valid - must be 11 digit long number");
                         }
 					}
                     else if (line.replace(" ","").equalsIgnoreCase("balance")){
@@ -102,15 +106,61 @@ public class BankClient
                                 System.out.println("Wrong account type.");
                             }
                         }
-
                     }
                     else if (line.replace(" ","").equalsIgnoreCase("help")){
-					    //TODO
+                        System.out.println("Available operations: \nnew client\nbalance\nloan\nhelp\nquit");
                     }
                     else if (line.replace(" ","").equalsIgnoreCase("loan")){
-					    //TODO
-                    }
 
+                        System.out.println("Type in: pesel currency amount time(in months)");
+                        line = in.readLine();
+                        String [] elems = line.split( " ");
+
+                        if(elems.length == 4){
+
+                            System.out.println("Type your key: ");
+                            String key = in.readLine();
+
+                            Map<String, String> map = new LinkedHashMap<String, String>();
+                            map.put(elems[0], key);
+                            premium = premium.ice_context(map);
+
+                            Currency cur = null;
+
+                            boolean currFlag = false;
+                            try{
+                                cur = Currency.valueOf(elems[1]);
+                            }catch (IllegalArgumentException e){
+                                currFlag = true;
+                            }
+
+                            if(currFlag){
+                                System.out.println("No such currency.");
+                            }else{
+                                try{
+                                    LoanResponse resp = premium.getLoan(new LoanRequest(elems[0], cur, Double.valueOf(elems[2]), Integer.valueOf(elems[3])));
+                                    if(resp.agreed){
+                                        System.out.println("Bank agreed to give You a loan.");
+                                        System.out.println("Cost in foreign currency: " + resp.ForeignCurrency);
+                                        System.out.println("Cost in native currency: " + resp.NativeCurrency);
+                                    }
+                                    else{
+                                        System.out.println("Bank didn't agree to give You a loan. Sorry.");
+                                    }
+                                }catch (AuthenticationFailedException | InvalidIDException | InvalidCurrencyException e){
+                                    System.err.println(e.msg);
+                                }
+                            }
+
+
+                        }else{
+                            System.out.println("Wrong number of arguments.\nTry again.");
+                        }
+
+                    }
+                    else if (line.replace(" ","").equalsIgnoreCase("quit")) {
+                        System.out.println("Thanks for using our application.");
+                    }
                     else System.out.println("No such operation. Type help to see available operations.");
 				}
 				catch (java.io.IOException ex){
@@ -134,5 +184,10 @@ public class BankClient
 		}
 		System.exit(status);
 	}
+
+
+	private static boolean isPeselValid(String id){
+	    return id.replace(" ", "").length() == 4;
+    }
 
 }
