@@ -16,6 +16,9 @@ public class ClientDatabase {
     }
 
     public static String generateKey(String id){
-        return String.valueOf(id.hashCode());
-    } //TODO
+        int key = id.hashCode();
+        if(key<0)
+            key *= -1;
+        return String.valueOf(key);
+    }
 }

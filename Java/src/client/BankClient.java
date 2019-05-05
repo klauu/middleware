@@ -173,7 +173,7 @@ public class BankClient
 
 
 	private static boolean isPeselValid(String id){
-	    return id.replace(" ", "").length() == 4;
+	    return id.replace(" ", "").length() == 11;
     }
 
 }
