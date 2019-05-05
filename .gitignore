@@ -11,7 +11,7 @@
 .mtj.tmp/
 
 Java/generated/Bank
-Java/generated/Currency
+Java/generated/CurrencyPackage
 
 # Package Files #
 *.jar
