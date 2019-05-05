@@ -1,19 +1,11 @@
-package Currency;
+package CurrencyPackage;
 
-import static io.grpc.stub.ClientCalls.asyncUnaryCall;
 import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.blockingUnaryCall;
 import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
-import static io.grpc.stub.ClientCalls.futureUnaryCall;
 import static io.grpc.MethodDescriptor.generateFullMethodName;
-import static io.grpc.stub.ServerCalls.asyncUnaryCall;
 import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 
 /**
  */
@@ -28,14 +20,14 @@ public final class CurrencyRatesStreamGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<Currency.RatesRequest,
-      Currency.RatesRespond> METHOD_GET_CURRENCY_RATES =
+  public static final io.grpc.MethodDescriptor<CurrencyPackage.RatesRequest,
+      CurrencyPackage.RatesRespond> METHOD_GET_CURRENCY_RATES =
       io.grpc.MethodDescriptor.create(
           io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING,
           generateFullMethodName(
               "Currency.CurrencyRatesStream", "GetCurrencyRates"),
-          io.grpc.protobuf.ProtoUtils.marshaller(Currency.RatesRequest.getDefaultInstance()),
-          io.grpc.protobuf.ProtoUtils.marshaller(Currency.RatesRespond.getDefaultInstance()));
+          io.grpc.protobuf.ProtoUtils.marshaller(CurrencyPackage.RatesRequest.getDefaultInstance()),
+          io.grpc.protobuf.ProtoUtils.marshaller(CurrencyPackage.RatesRespond.getDefaultInstance()));
 
   /**
    * Creates a new async stub that supports all call types for the service
@@ -66,8 +58,8 @@ public final class CurrencyRatesStreamGrpc {
 
     /**
      */
-    public void getCurrencyRates(Currency.RatesRequest request,
-        io.grpc.stub.StreamObserver<Currency.RatesRespond> responseObserver) {
+    public void getCurrencyRates(CurrencyPackage.RatesRequest request,
+                                 io.grpc.stub.StreamObserver<CurrencyPackage.RatesRespond> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_GET_CURRENCY_RATES, responseObserver);
     }
 
@@ -77,8 +69,8 @@ public final class CurrencyRatesStreamGrpc {
             METHOD_GET_CURRENCY_RATES,
             asyncServerStreamingCall(
               new MethodHandlers<
-                Currency.RatesRequest,
-                Currency.RatesRespond>(
+                CurrencyPackage.RatesRequest,
+                CurrencyPackage.RatesRespond>(
                   this, METHODID_GET_CURRENCY_RATES)))
           .build();
     }
@@ -104,8 +96,8 @@ public final class CurrencyRatesStreamGrpc {
 
     /**
      */
-    public void getCurrencyRates(Currency.RatesRequest request,
-        io.grpc.stub.StreamObserver<Currency.RatesRespond> responseObserver) {
+    public void getCurrencyRates(CurrencyPackage.RatesRequest request,
+                                 io.grpc.stub.StreamObserver<CurrencyPackage.RatesRespond> responseObserver) {
       asyncServerStreamingCall(
           getChannel().newCall(METHOD_GET_CURRENCY_RATES, getCallOptions()), request, responseObserver);
     }
@@ -131,8 +123,8 @@ public final class CurrencyRatesStreamGrpc {
 
     /**
      */
-    public java.util.Iterator<Currency.RatesRespond> getCurrencyRates(
-        Currency.RatesRequest request) {
+    public java.util.Iterator<CurrencyPackage.RatesRespond> getCurrencyRates(
+            CurrencyPackage.RatesRequest request) {
       return blockingServerStreamingCall(
           getChannel(), METHOD_GET_CURRENCY_RATES, getCallOptions(), request);
     }
@@ -177,8 +169,8 @@ public final class CurrencyRatesStreamGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_CURRENCY_RATES:
-          serviceImpl.getCurrencyRates((Currency.RatesRequest) request,
-              (io.grpc.stub.StreamObserver<Currency.RatesRespond>) responseObserver);
+          serviceImpl.getCurrencyRates((CurrencyPackage.RatesRequest) request,
+              (io.grpc.stub.StreamObserver<CurrencyPackage.RatesRespond>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -199,7 +191,7 @@ public final class CurrencyRatesStreamGrpc {
   private static final class CurrencyRatesStreamDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return Currency.CurrencyProto.getDescriptor();
+      return CurrencyPackage.CurrencyProto.getDescriptor();
     }
   }
 

@@ -59,17 +59,18 @@ public class BankClient
 					    line = in.readLine();
 					    String [] elems = line.split( " ");
 
-					    if(isPeselValid(elems[2])){
-                            if(elems.length == 5){
+
+					    if(elems.length == 5){
+                            if(isPeselValid(elems[2])){
                                 NewClientResponse resp = factory.newClient(new UserData(elems[0], elems[1], elems[2], Double.valueOf(elems[3] )), Double.valueOf(elems[4]));
 
                                 System.out.println("Type: " + resp.type);
                                 System.out.println("Key: " + resp.key);
                             }else{
-                                System.out.println("Wrong number of arguments.\nTry again.");
+                                System.out.println("Given ID is not valid - must be 11 digit long number");
                             }
                         }else{
-                            System.out.println("Given ID is not valid - must be 11 digit long number");
+                            System.out.println("Wrong number of arguments.\nTry again.");
                         }
 					}
                     else if (line.replace(" ","").equalsIgnoreCase("balance")){

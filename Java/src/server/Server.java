@@ -37,6 +37,9 @@ public class Server
 
             System.out.println("Ready to work");
 
+            CurrencyClient currencyClient = new CurrencyClient("localhost", 50051);
+            currencyClient.run();
+
             communicator.waitForShutdown();
         }
         catch (Exception e)
